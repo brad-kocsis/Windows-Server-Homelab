@@ -1,0 +1,114 @@
+1. DNS “No Response from Server”
+
+Problem:
+Client machine could not resolve domain. nslookup returned “No response from server.”
+
+Root Cause:
+DNS service was not responding properly and/or firewall profile was misconfigured.
+
+Resolution:
+
+Verified DNS service was running
+
+Checked netstat -an | find ":53" to confirm DNS listening on UDP/TCP
+
+Ensured firewall profiles (Domain/Private/Public) were correctly configured
+
+Verified client DNS settings pointed to 192.168.10.10
+
+Rebuilt DC when necessary to ensure clean DNS configuration
+
+Lesson Learned:
+Active Directory is heavily dependent on properly functioning DNS. If DNS fails, the domain effectively fails.
+
+2. DHCP Not Leasing Addresses
+
+Problem:
+Client was not receiving IP lease.
+
+Root Cause:
+Scope configuration and/or authorization in AD was incomplete.
+
+Resolution:
+
+Created and activated DHCP scope
+
+Authorized DHCP server in Active Directory
+
+Verified lease with ipconfig /all
+
+Confirmed client was set to obtain IP automatically
+
+Lesson Learned:
+DHCP must be authorized in AD to function properly in domain environments.
+
+3. GPO Not Applying
+
+Problem:
+Group Policy changes (e.g., Control Panel restrictions) did not apply after gpupdate /force.
+
+Root Cause:
+OU structure or security filtering misconfiguration.
+
+Resolution:
+
+Verified correct OU placement of user/computer
+
+Confirmed GPO link at proper OU level
+
+Checked security filtering
+
+Logged out/in to refresh user policies
+
+Lesson Learned:
+GPO scope is determined by OU hierarchy and security filtering — not just creation.
+
+4. RSAT Not Available
+
+Problem:
+Client could not open gpmc.msc.
+
+Root Cause:
+RSAT tools not installed on client.
+
+Resolution:
+
+Temporarily configured NAT adapter
+
+Used external router IP to gain internet access
+
+Installed RSAT via Windows Features
+
+Lesson Learned:
+Administrative tools must be installed separately on client systems.
+
+5. DNS Listening Only on UDP
+
+Problem:
+netstat showed only UDP on port 53.
+
+Investigation:
+Confirmed DNS service status and listening behavior.
+
+Lesson Learned:
+Understanding service ports and how Windows services bind to interfaces is critical in diagnosing network failures.
+
+Final Section You Should Add
+
+At the bottom, include:
+
+Skills Demonstrated
+
+Windows Server Administration
+
+Active Directory Domain Services
+
+DNS & DHCP Configuration
+
+Group Policy Deployment
+
+Virtual Network Configuration
+
+Infrastructure Troubleshooting
+
+Client/Server Authentication Management
