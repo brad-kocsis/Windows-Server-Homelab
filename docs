@@ -1,0 +1,270 @@
+Week 1
+Friday — Lab Environment Creation
+Objective
+
+Build the base virtual lab environment that will host the Active Directory infrastructure.
+
+Architecture
+
+Two virtual machines were created:
+
+• Domain Controller (Windows Server)
+• Client Workstation (Windows 10)
+
+Both machines were configured to operate on a private internal virtual network to simulate a corporate LAN.
+
+Setup Steps
+
+Installed VirtualBox hypervisor.
+
+Created Windows Server VM for the Domain Controller.
+
+Created Windows 10 VM for the client workstation.
+
+Configured networking:
+
+Internal network adapter for lab communication
+
+NAT adapter temporarily used for internet access.
+
+Assigned a static IP address to the Domain Controller.
+
+Example configuration:
+
+DC IP
+
+192.168.10.10
+Result
+
+A basic isolated lab network capable of supporting domain services.
+
+Saturday — Active Directory Domain Installation
+Objective
+
+Promote the Windows Server machine to a Domain Controller.
+
+Architecture
+
+The Domain Controller hosts:
+
+• Active Directory Domain Services
+• DNS Server
+
+Domain name created:
+
+company.local
+Build Steps
+
+Installed Active Directory Domain Services (AD DS) role.
+
+Promoted the server to a Domain Controller.
+
+Created a new forest.
+
+Installed and configured DNS automatically during promotion.
+
+Rebooted server to finalize domain creation.
+
+Result
+
+A fully functioning Active Directory forest and domain was created.
+
+Sunday — Organizational Unit Structure
+Objective
+
+Create a logical structure inside Active Directory to simulate a real company.
+
+Architecture
+
+Organizational Unit hierarchy created:
+
+Company
+ ├── Users
+ ├── Computers
+ ├── Servers
+ └── IT
+Build Steps
+
+Opened Active Directory Users and Computers.
+
+Created a Company root OU.
+
+Created departmental OUs.
+
+Created initial user accounts.
+
+Example users:
+
+IT_User1
+Test_Reset_User
+Result
+
+A realistic organizational hierarchy was implemented.
+
+Monday — Delegated Administration
+Objective
+
+Allow IT staff to reset user passwords without full domain admin privileges.
+
+Architecture
+
+Delegation applied to:
+
+Company → Users OU
+Build Steps
+
+Opened Delegation of Control Wizard.
+
+Added IT administrative account.
+
+Granted permission:
+
+Reset user passwords
+
+Tested delegation using a non-admin IT account.
+
+Result
+
+Delegated administrative permissions successfully simulated real IT support roles.
+
+Tuesday — Client Domain Join
+Objective
+
+Connect a workstation to the Active Directory domain.
+
+Architecture
+Client PC → company.local domain
+Build Steps
+
+Configured client DNS to point to:
+
+192.168.10.10
+
+Joined workstation to domain:
+
+company.local
+
+Rebooted client.
+
+Logged in using domain credentials.
+
+Result
+
+Client successfully authenticated against the Domain Controller.
+
+Week 2
+Wednesday — DNS and Network Troubleshooting
+Objective
+
+Diagnose and resolve network connectivity issues affecting domain communication.
+
+Issues Encountered
+
+Client machine received AutoConfiguration address:
+
+169.254.x.x
+
+This prevented proper DNS communication.
+
+Troubleshooting Steps
+
+Verified DNS service status on DC.
+
+Confirmed correct DNS server address on client.
+
+Reset network adapter configuration.
+
+Verified network adapter settings in VirtualBox.
+
+Reconfigured adapters for correct routing.
+
+Result
+
+Client was able to resolve:
+
+company.local
+
+and communicate with the Domain Controller.
+
+Thursday — Group Policy Management
+Objective
+
+Implement Group Policy to control workstation behavior.
+
+Architecture
+Domain Controller
+   ↓
+Group Policy Objects
+   ↓
+Domain Clients
+Build Steps
+
+Installed Group Policy Management tools (RSAT).
+
+Opened Group Policy Management Console.
+
+Created new GPO.
+
+Example policy implemented:
+
+Disable Control Panel access
+
+Linked GPO to the Users OU.
+
+Forced policy update:
+
+gpupdate /force
+Result
+
+Client workstation successfully applied the new domain policy.
+
+Week 3
+Friday — Infrastructure Verification and Documentation
+Objective
+
+Validate the full environment and prepare documentation.
+
+Architecture Overview
+
+Environment components:
+
+• Domain Controller
+• Active Directory
+• DNS
+• Group Policy
+• Domain Client
+• Delegated IT administration
+
+Validation Steps
+
+Verified domain authentication.
+
+Tested delegated password reset functionality.
+
+Confirmed Group Policy enforcement.
+
+Confirmed DNS resolution between client and server.
+
+Documented configuration and captured screenshots.
+
+Result
+
+A complete functional Active Directory home lab was successfully deployed and documented.
+
+Technologies Used
+
+• Windows Server
+• Windows 10
+• Active Directory Domain Services
+• DNS Server
+• Group Policy
+• VirtualBox
+
+Skills Demonstrated
+
+• Windows Server administration
+• Active Directory management
+• DNS troubleshooting
+• Group Policy configuration
+• Virtualized lab deployment
+• IT infrastructure documentation
