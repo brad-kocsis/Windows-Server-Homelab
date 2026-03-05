@@ -1,0 +1,18 @@
+                     ┌──────────────────────────┐
+                     │        Home Router       │
+                     │    (Internet Access)     │
+                     └────────────┬─────────────┘
+                                  │
+                          NAT Adapter (Client)
+                                  │
+                ┌─────────────────┴─────────────────┐
+                │                                   │
+        ┌─────────────────┐                ┌─────────────────┐
+        │   Domain        │                │    Client VM     │
+        │   Controller    │                │  Windows 10/11   │
+        │  192.168.10.10  │◄──────────────►│  Domain Joined   │
+        │                 │    Internal     │                 │
+        │  AD DS          │    Network      │  RSAT Tools     │
+        │  DNS            │                 │  GPO Testing    │
+        │  DHCP           │                 │                 │
+        └─────────────────┘                └─────────────────┘
